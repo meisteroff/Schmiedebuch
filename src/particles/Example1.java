@@ -50,7 +50,7 @@ public class Example1 extends ExampleAdapter {
 		spawnRainDrop();
 
 		if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-			spawnExplosion(Gdx.input.getX(), 360 - Gdx.input.getY());
+			spawnExplosion(Helper.mouseX(), Helper.mouseY());
 		}
 
 		for (Iterator<Particle> it = particles.iterator(); it.hasNext();) {
@@ -94,7 +94,7 @@ public class Example1 extends ExampleAdapter {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if (button == Input.Buttons.LEFT) {
-			spawnExplosion(screenX, 360 - screenY);
+			spawnExplosion(Helper.mouseX(), Helper.mouseY());
 		}
 
 		return false;

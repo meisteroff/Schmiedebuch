@@ -1,5 +1,6 @@
 package helper;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,6 +30,14 @@ public class Helper {
 		configuration.foregroundFPS = 60;
 
 		return configuration;
+	}
+	
+	public static float mouseX() {
+		return Gdx.input.getX();
+	}
+	
+	public static float mouseY() {
+		return 360 - Gdx.input.getY();
 	}
 
 }
