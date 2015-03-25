@@ -1,9 +1,12 @@
 package actionlist.implementation;
 
+/**
+ * @author meisteroff
+ */
 public class BlockAction extends Action {
 
 	private final ActionList actionList;
-	
+
 	public BlockAction(ActionList actionList) {
 		super(true);
 		this.actionList = actionList;

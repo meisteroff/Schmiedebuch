@@ -1,5 +1,8 @@
 package actionlist.implementation;
 
+/**
+ * @author meisteroff
+ */
 public class WaitAction extends Action {
 
 	private int time;

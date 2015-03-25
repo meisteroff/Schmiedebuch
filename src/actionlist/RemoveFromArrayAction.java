@@ -4,6 +4,9 @@ import actionlist.implementation.NonBlockingAction;
 
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * @author meisteroff
+ */
 public class RemoveFromArrayAction<T> extends NonBlockingAction {
 
 	private final Array<T> array;

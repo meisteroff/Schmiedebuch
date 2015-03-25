@@ -4,6 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import actionlist.implementation.BlockingAction;
 
+
+/**
+ * @author meisteroff
+ */
 public class MoveToAction extends BlockingAction {
 
 	private final Vector2 source;
@@ -32,7 +36,7 @@ public class MoveToAction extends BlockingAction {
 		vector.set(target).sub(source);
 
 		float distance = vector.len();
-		
+
 		if (distance <= speed) {
 			targetReached = true;
 			vector.nor().scl(distance);

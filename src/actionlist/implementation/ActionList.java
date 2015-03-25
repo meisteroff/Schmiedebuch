@@ -1,9 +1,11 @@
 package actionlist.implementation;
 
 import java.util.Iterator;
-
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * @author meisteroff
+ */
 public class ActionList extends Action {
 
 	private final Array<Action> actions = new Array<Action>();

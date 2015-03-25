@@ -10,7 +10,7 @@ import actionlist.implementation.BlockingActionList;
  * Once the unit reaches its destination the RemoveFromArrayAction will take care of
  * removing the target from the waypoint drawing list.
  * 
- * @author meisterjava
+ * @author meisteroff
  */
 public class WaypointAction extends BlockingActionList {
 
