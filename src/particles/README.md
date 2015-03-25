@@ -25,7 +25,7 @@ This is everything a basic particle system requires.
 
 Some additional useful data to store within a particle:
 
-- **texture:** drawing something on screen should definitely be considered
+- **texture:** drawing more than just basic shapes should definitely be considered
 - **age/lifetime:** can be used for triggers like particle death (=removal)
 - **color:** more variety for particle effects, for example alpha value based on age/lifetime
 - **size:** more variety for particle effects
