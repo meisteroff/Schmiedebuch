@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 /**
  * @author meisteroff
  */
-public class ExampleAdapter extends ApplicationAdapter implements InputProcessor {
+public class Adapter extends ApplicationAdapter implements InputProcessor {
 
 	public boolean keyDown(int keycode) {
 		return false;

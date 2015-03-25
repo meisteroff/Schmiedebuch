@@ -1,6 +1,6 @@
 package particles;
 
-import helper.ExampleAdapter;
+import helper.Adapter;
 import helper.Helper;
 
 import java.util.Iterator;
@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.Array;
  * 
  * @author meisteroff
  */
-public class Example extends ExampleAdapter {
+public class Demo extends Adapter {
 
 	private SpriteBatch batch;
 	private Sprite pixel;
@@ -258,7 +258,7 @@ public class Example extends ExampleAdapter {
 	}
 
 	public static void main(String[] args) {
-		new LwjglApplication(new Example(), Helper.configuration("Particles"));
+		new LwjglApplication(new Demo(), Helper.configuration("Particles"));
 	}
 
 }
