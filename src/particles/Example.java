@@ -70,8 +70,8 @@ public class Example extends ExampleAdapter {
 
 			particle.velocityX += particle.accelerationX;
 			particle.velocityY += particle.accelerationY;
-			particle.x += particle.velocityX;
-			particle.y += particle.velocityY;
+			particle.positionX += particle.velocityX;
+			particle.positionY += particle.velocityY;
 
 			particle.angularVelocity += particle.angularAcceleration;
 			particle.rotation += particle.angularVelocity;
@@ -111,8 +111,8 @@ public class Example extends ExampleAdapter {
 	private void spawnRainDrop() {
 		Particle particle = new Particle();
 
-		particle.x = MathUtils.random(640);
-		particle.y = 360;
+		particle.positionX = MathUtils.random(640);
+		particle.positionY = 360;
 		particle.size = MathUtils.random(1f, 3f);
 
 		particle.velocityX = MathUtils.random(.01f, .02f) * MathUtils.randomSign();
@@ -135,8 +135,8 @@ public class Example extends ExampleAdapter {
 		for (int i = 0; i < amount; i++) {
 			Particle particle = new Particle();
 
-			particle.x = x;
-			particle.y = y;
+			particle.positionX = x;
+			particle.positionY = y;
 			particle.size = MathUtils.random(2f, 6f);
 
 			vector.set(1, 0).rotate(MathUtils.random(360f)).scl(MathUtils.random(1.2f, 3.4f));
@@ -165,8 +165,8 @@ public class Example extends ExampleAdapter {
 		for (int i = 0; i < amount; i++) {
 			Particle particle = new Particle();
 
-			particle.x = x;
-			particle.y = y;
+			particle.positionX = x;
+			particle.positionY = y;
 			particle.size = MathUtils.random(2f, 6f);
 
 			vector.set(1, 0).rotate(MathUtils.random(360f)).scl(MathUtils.random(.2f, .4f));
@@ -192,8 +192,8 @@ public class Example extends ExampleAdapter {
 		float height = particle.size;
 
 		/* draw centered around x,y */
-		float x = particle.x - width / 2f;
-		float y = particle.y - height / 2f;
+		float x = particle.positionX - width / 2f;
+		float y = particle.positionY - height / 2f;
 
 		float rotation = particle.rotation;
 

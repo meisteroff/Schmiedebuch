@@ -5,7 +5,7 @@ package particles;
  */
 public class Particle {
 
-	float x, y;
+	float positionX, positionY;
 	float velocityX, velocityY;
 	float accelerationX, accelerationY;
 	float angularVelocity;
