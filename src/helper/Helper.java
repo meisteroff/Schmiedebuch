@@ -20,9 +20,9 @@ public class Helper {
 		return new Sprite(new Texture(pixmap));
 	}
 
-	public static LwjglApplicationConfiguration configuration() {
+	public static LwjglApplicationConfiguration configuration(String title) {
 		LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
-		configuration.title = "";
+		configuration.title = title;
 		configuration.width = 640;
 		configuration.height = 360;
 		configuration.resizable = false;

@@ -6,12 +6,15 @@ package particles;
 public class Particle {
 
 	float x, y;
-	float velX, velY;
-	float accX, accY;
+	float velocityX, velocityY;
+	float accelerationX, accelerationY;
+	float angularVelocity;
+	float angularAcceleration;
 
 	float size;
-	float r, g, b, a;
-	
+	float red, green, blue, alpha;
+	float rotation;
+
 	int age, lifetime;
 
 }
