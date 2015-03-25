@@ -1,10 +1,10 @@
 package actionlist;
 
-import actionlist.implementation.NonBlockingActionList;
+import actionlist.implementation.NonBlockingAction;
 
 import com.badlogic.gdx.utils.Array;
 
-public class RemoveFromArrayAction<T> extends NonBlockingActionList {
+public class RemoveFromArrayAction<T> extends NonBlockingAction {
 
 	private final Array<T> array;
 	private final T value;
