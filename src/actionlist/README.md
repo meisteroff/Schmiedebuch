@@ -34,9 +34,9 @@ ActionList.update() {
 This simple ***break*** is what makes the use of an ActionList so powerful. Imagine a game where you want to issue commands to your units. Every command should be registered as they come but only executed one after the other. It might look something like this:
 
 > 0. MoveTo 10,10
-> 0. ThrowGrenadeTo to 11,10
+> 0. ThrowGrenadeTo 11,10
 > 0. MoveTo 10,15
-> 0. ThrowGrenadeTo to 9,15
+> 0. ThrowGrenadeTo 9,15
 > 0. ...
 
 The same effect can of course be achieved with a FIFO queue where only the front Action is updated.
