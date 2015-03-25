@@ -29,11 +29,14 @@ public class Example extends ExampleAdapter {
 
 	private SpriteBatch batch;
 	private Sprite pixel;
-	private final Color color = new Color();
+
+	private final Color sharedColor = new Color();
+	private final Vector2 sharedVector = new Vector2();
 
 	private int clock;
 	private Array<Particle> particles;
-	private final Vector2 particleEmitter = new Vector2();
+	private final Vector2 particleEmitterWithTrail = new Vector2();
+	private final Vector2 particleEmitterAsParent = new Vector2();
 
 	@Override
 	public void create() {
@@ -59,10 +62,17 @@ public class Example extends ExampleAdapter {
 			spawnExplosion(10, Helper.mouseX(), Helper.mouseY());
 		}
 
-		particleEmitter.x = 640 / 2 + 640 / 2 * MathUtils.sin(.1f * clock / MathUtils.PI2);
-		particleEmitter.y = 360 / 2 + 360 / 2 * MathUtils.sin(.2f * clock / MathUtils.PI2);
+		particleEmitterWithTrail.x = 640 / 2 + 640 / 2 * MathUtils.sin(.1f * clock / MathUtils.PI2);
+		particleEmitterWithTrail.y = 360 / 2 + 360 / 2 * MathUtils.sin(.2f * clock / MathUtils.PI2);
 
-		spawnTrail(5, particleEmitter.x, particleEmitter.y);
+		particleEmitterAsParent.x = 640 / 2 + 640 / 4 * MathUtils.sin(.2f * clock / MathUtils.PI2);
+		particleEmitterAsParent.y = 360 / 2 + 360 / 4 * MathUtils.sin(.1f * clock / MathUtils.PI2);
+
+		spawnTrail(5, particleEmitterWithTrail.x, particleEmitterWithTrail.y);
+
+		if (clock % 60 == 0) {
+			spawnExplosionWithParent(50, particleEmitterAsParent);
+		}
 
 		for (Iterator<Particle> it = particles.iterator(); it.hasNext();) {
 			Particle particle = it.next();
@@ -94,7 +104,8 @@ public class Example extends ExampleAdapter {
 		for (Particle particle : particles) {
 			drawParticle(particle);
 		}
-		drawParticleEmitter(particleEmitter);
+		drawParticleEmitter(particleEmitterWithTrail);
+		drawParticleEmitter(particleEmitterAsParent);
 
 		batch.end();
 	}
@@ -131,31 +142,15 @@ public class Example extends ExampleAdapter {
 	}
 
 	private void spawnExplosion(int amount, float x, float y) {
-		Vector2 vector = new Vector2();
 		for (int i = 0; i < amount; i++) {
-			Particle particle = new Particle();
+			particles.add(makeExplosionParticle(x, y));
+		}
+	}
 
-			particle.positionX = x;
-			particle.positionY = y;
-			particle.size = MathUtils.random(2f, 6f);
-
-			vector.set(1, 0).rotate(MathUtils.random(360f)).scl(MathUtils.random(1.2f, 3.4f));
-			particle.velocityX = vector.x;
-			particle.velocityY = vector.y;
-
-			particle.accelerationX = MathUtils.random(.02f, .04f) * Math.signum(-particle.velocityX);
-			particle.accelerationY = MathUtils.random(.02f, .04f) * Math.signum(-particle.velocityY);
-
-			particle.lifetime = MathUtils.random(30, 80);
-
-			particle.red = MathUtils.random(.2f, .8f);
-			particle.green = MathUtils.random(.2f, .8f);
-			particle.blue = MathUtils.random(.3f);
-			particle.alpha = 1;
-
-			particle.angularVelocity = MathUtils.random(3.5f) * MathUtils.randomSign();
-			particle.angularAcceleration = MathUtils.random(.5f) * MathUtils.randomSign();
-
+	private void spawnExplosionWithParent(int amount, Vector2 parent) {
+		for (int i = 0; i < amount; i++) {
+			Particle particle = makeExplosionParticle(0, 0);
+			particle.parent = parent;
 			particles.add(particle);
 		}
 	}
@@ -187,6 +182,33 @@ public class Example extends ExampleAdapter {
 		}
 	}
 
+	private Particle makeExplosionParticle(float x, float y) {
+		Particle particle = new Particle();
+
+		particle.positionX = x;
+		particle.positionY = y;
+		particle.size = MathUtils.random(2f, 6f);
+
+		sharedVector.set(1, 0).rotate(MathUtils.random(360f)).scl(MathUtils.random(1.2f, 3.4f));
+		particle.velocityX = sharedVector.x;
+		particle.velocityY = sharedVector.y;
+
+		particle.accelerationX = MathUtils.random(.02f, .04f) * Math.signum(-particle.velocityX);
+		particle.accelerationY = MathUtils.random(.02f, .04f) * Math.signum(-particle.velocityY);
+
+		particle.lifetime = MathUtils.random(30, 80);
+
+		particle.red = MathUtils.random(.2f, .8f);
+		particle.green = MathUtils.random(.2f, .8f);
+		particle.blue = MathUtils.random(.3f);
+		particle.alpha = 1;
+
+		particle.angularVelocity = MathUtils.random(3.5f) * MathUtils.randomSign();
+		particle.angularAcceleration = MathUtils.random(.5f) * MathUtils.randomSign();
+
+		return particle;
+	}
+
 	private void drawParticle(Particle particle) {
 		float width = particle.size;
 		float height = particle.size;
@@ -195,15 +217,20 @@ public class Example extends ExampleAdapter {
 		float x = particle.positionX - width / 2f;
 		float y = particle.positionY - height / 2f;
 
+		if (particle.parent != null) {
+			x += particle.parent.x;
+			y += particle.parent.y;
+		}
+
 		float rotation = particle.rotation;
 
-		color.set(particle.red, particle.green, particle.blue, particle.alpha);
+		sharedColor.set(particle.red, particle.green, particle.blue, particle.alpha);
 
 		/* rotate around center */
 		float originX = width / 2f;
 		float originY = height / 2f;
 
-		rectangle(x, y, width, height, originX, originY, rotation, color);
+		rectangle(x, y, width, height, originX, originY, rotation, sharedColor);
 	}
 
 	private void drawParticleEmitter(Vector2 emitter) {
@@ -214,9 +241,9 @@ public class Example extends ExampleAdapter {
 		float x = emitter.x - width / 2f;
 		float y = emitter.y - height / 2f;
 
-		color.set(1, 1, 1, 1);
+		sharedColor.set(1, 1, 1, 1);
 
-		rectangle(x, y, width, height, 0, 0, 0, color);
+		rectangle(x, y, width, height, 0, 0, 0, sharedColor);
 	}
 
 	private void rectangle(float x, float y, float width, float height, float originX, float originY, float rotation, Color color) {

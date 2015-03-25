@@ -1,5 +1,7 @@
 package particles;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * @author meisteroff
  */
@@ -16,5 +18,7 @@ public class Particle {
 	float rotation;
 
 	int age, lifetime;
+	
+	Vector2 parent;
 
 }
