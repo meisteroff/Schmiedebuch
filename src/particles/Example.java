@@ -17,11 +17,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Demo for different types of particles:
- * 1a. explosion (LEFT-click)
- * 1b. explosion (RIGHT-hold)
- * 2. rain drops (continuous)
- * 3. moving object with trail also known as particle emitter (continuous)
+ * Demo for different types of particles:<br><br>
+ * 
+ * 1a. explosion (LEFT-click)<br>
+ * 1b. explosion (RIGHT-hold)<br>
+ * 2. rain drops (continuous)<br>
+ * 3. moving object with trail (continuous)<br>
+ * 4. moving particle emitter as parent (every x ticks)
  * 
  * @author meisteroff
  */
